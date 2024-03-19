@@ -1,13 +1,20 @@
 const express = require("express");
+const path = require("path");
 
-const sequelize = require("./utils/db");
 const Coders = require("./model/Coders");
 const codeRoute = require("./routes/codeRoute");
 
 const app = express();
+const __dirname = path.resolve();
 
 app.use(express.json());
 app.use("/api", codeRoute);
+
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+});
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
