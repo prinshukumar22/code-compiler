@@ -5,7 +5,6 @@ const Coders = require("./model/Coders");
 const codeRoute = require("./routes/codeRoute");
 
 const app = express();
-const __dirname = path.resolve();
 
 app.use(express.json());
 app.use("/api", codeRoute);
